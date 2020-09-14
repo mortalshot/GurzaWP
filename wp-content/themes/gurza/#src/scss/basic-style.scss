@@ -1,0 +1,247 @@
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+li {
+    list-style-type: none;
+}
+
+body {
+    background: #0b0b0b;
+    font-family: Montserrat;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: $text-color;
+    overflow-x: hidden;
+
+    &.lock {
+        overflow: hidden;
+    }
+}
+
+.container {
+    max-width: $container;
+    margin: 0 auto;
+    padding: 0 10px;
+}
+
+.ZoomContainer {
+    display: none;
+}
+.zoomWindow {
+    background-color: rgb(21, 21, 21) !important;
+}
+
+.button {
+    border: 3px solid $bg-color;
+    padding: 14.5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    font-family: Rodchenko;
+    font-size: 14px;
+    line-height: 1;
+    letter-spacing: 1.82px;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    color: $text-color;
+    width: 161px;
+    cursor: pointer;
+    transition: 0.3s ease all 0s;
+
+    &::after {
+        content: "";
+        background: url(../img/icons/btnhov.svg) no-repeat right;
+        opacity: 0;
+        width: 0;
+        height: 13px;
+        transition: 0.3s ease all 0s;
+    }
+
+    &:hover {
+        &::after {
+            display: block;
+            opacity: 1;
+            width: 18px;
+            height: 13px;
+            padding-left: 8px;
+        }
+    }
+
+    &:focus {
+        outline: none;
+        opacity: 0.5;
+    }
+}
+
+.button-bg {
+    background: $bg-color;
+    width: 128px;
+}
+
+.title {
+    font-weight: 600;
+    font-size: 38px;
+    line-height: 57px;
+
+    @media screen and (max-width: 1440px) {
+        font-size: calc(22px + 16 * ((100vw - 320px) / (1440 - 320)));
+        line-height: calc(57 / 38);
+    }
+}
+.title-with-points {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    &::before {
+        content: "";
+        display: block;
+        width: 35px;
+        height: 35px;
+        background: url(../img/icons/title-points.svg) no-repeat left/contain;
+        padding-right: 24px;
+
+        @media screen and (max-width: 575px) {
+            width: 18px;
+            height: 18px;
+            padding-right: 16px;
+        }
+    }
+}
+.angle-title {
+    font-weight: 600;
+    font-size: 34px;
+    line-height: 51px;
+    max-width: 490px;
+    position: relative;
+    padding: 0 0 38px 45px;
+    margin-bottom: 50px;
+
+    @media screen and (max-width: 1440px) {
+        font-size: calc(24px + 10 * ((100vw - 320px) / (1440 - 320)));
+        line-height: calc(41 / 34);
+    }
+
+    @media screen and (max-width: 767px) {
+        margin-bottom: 34px;
+    }
+
+    @media screen and (max-width: 575px) {
+        padding: 0 0 20px 20px;
+        line-height: calc(51 / 34);
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        display: block;
+        background: $bg-color;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transition: 1s ease all 0s;
+        width: 0;
+        height: 0;
+    }
+
+    &.active {
+        &::before {
+            height: 80%;
+            width: 10px;
+
+            @media screen and (max-width: 575px) {
+                width: 6px;
+                height: 73%;
+            }
+        }
+
+        &::after {
+            height: 10px;
+            width: 61%;
+
+            @media screen and (max-width: 575px) {
+                height: 6px;
+                width: 77%;
+            }
+        }
+    }
+}
+
+.d-flex {
+    display: flex;
+}
+
+.accent {
+    color: $accent-color;
+}
+
+.up-btn {
+    position: fixed;
+    bottom: 32px;
+    left: -100px;
+    transition: 0.3s ease all 0s;
+    opacity: 0;
+    visibility: hidden;
+
+    span {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: #c4c4c4;
+        @media screen and (max-width: 575px) {
+            width: 51px;
+            height: 51px;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            width: 25px;
+            height: 4.5px;
+            background: #000;
+            position: absolute;
+            top: 50%;
+            @media screen and (max-width: 575px) {
+                width: 21.25px;
+                height: 3.8px;
+            }
+        }
+        &::before {
+            right: 10px;
+            transform: translate(0, -50%) rotate(45deg);
+            @media screen and (max-width: 575px) {
+                right: 8.5px;
+            }
+        }
+        &::after {
+            transform: translate(0, -50%) rotate(-45deg);
+            right: 25px;
+            @media screen and (max-width: 575px) {
+                right: 21px;
+            }
+        }
+    }
+
+    &.show {
+        opacity: 0.3;
+        visibility: visible;
+        left: 30px;
+        @media screen and (max-width: 575px) {
+            left: 20px;
+        }
+    }
+}

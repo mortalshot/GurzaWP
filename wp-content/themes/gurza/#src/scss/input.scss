@@ -1,0 +1,103 @@
+.input-wrapper {
+    position: relative;
+    padding: 0 10px;
+
+    &__text {
+        width: 100%;
+        max-width: 264px;
+        font-family: Montserrat;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 22px;
+        letter-spacing: 1px;
+        color: #fff;
+        background: transparent;
+        border-radius: 0;
+        padding: 15px 10px;
+        border: none;
+        border-bottom: 1px solid #615D5D;
+
+        @media screen and (max-width: 1440px) {
+            font-size: calc(12px + 4 * ((100vw - 320px) / (1440 - 320)));
+            line-height: calc(22 / 16);
+        }
+
+        @media screen and (max-width: 575px) {
+            padding: 12px 9px;
+        }
+        
+        &::placeholder {
+            font-weight: 400;
+            color: #fff;
+            opacity: 1;
+            transition: 0.5s ease all 0s;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 22px;
+
+            @media screen and (max-width: 1440px) {
+                font-size: calc(12px + 6 * ((100vw - 320px) / (1440 - 320)));
+                line-height: calc(22 / 18);
+            }
+        }
+
+        &:focus {
+            outline: 0;
+            &::placeholder {
+                opacity: 0;
+            }
+        }
+    }
+
+    &__textarea {
+        max-width: 558px;
+        height: 52px;
+        resize: vertical;
+        overflow: hidden;
+    }
+
+    input[type="radio"] {
+        display: none;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    &__label {
+        padding-left: 36px;
+        cursor: pointer;
+        position: relative;
+        line-height: 24px;
+        font-size: calc(13px + 3 * ((100vw - 320px) / (1440 - 320)));
+        line-height: calc(24 / 16);
+        user-select: none;
+        &::before {
+            content: "";
+            width: 24px;
+            height: 24px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: #fff;
+            border: 1px solid #000;
+        }
+    }
+}
+
+.input-wrapper--radio {
+    input[type="radio"] + label:before {
+        border-radius: 50%;
+    }
+
+    input[type="radio"]:checked + label:before {
+        border-width: 8px;
+    }
+}
+.input-wrapper--check {
+    input[type="checkbox"]:checked + label:before {
+        content: "\2713";
+        line-height: 23px;
+        padding-left: 4px;
+    }
+}
