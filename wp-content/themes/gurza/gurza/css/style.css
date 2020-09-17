@@ -626,15 +626,15 @@ body.lock {
   position: relative;
 }
 
-.header__item {
+.header .menu-item {
   margin-right: 60px;
 }
 
-.header__item:last-child {
+.header .menu-item:last-child {
   margin-right: 0;
 }
 
-.header__link {
+.header .menu-item a {
   font-weight: 700;
   font-size: 16px;
   line-height: 1;
@@ -645,7 +645,7 @@ body.lock {
   transition: 0.3s ease all 0s;
 }
 
-.header__link:hover {
+.header .menu-item a:hover {
   color: #69692c;
 }
 
@@ -1382,7 +1382,12 @@ body.lock {
 }
 
 .color__item {
+  display: block;
+  width: 29px;
+  height: 29px;
   margin-right: 17px;
+  border-radius: 50%;
+  color: #cccccc;
 }
 
 .color__item:last-child {
@@ -2102,7 +2107,7 @@ body.lock {
 }
 
 .rashguard__item.slick-center img {
-  max-width: 300px;
+  max-width: 190px;
 }
 
 .rashguard__item img {
@@ -2833,13 +2838,17 @@ body.lock {
   display: none !important;
 }
 
+.instagram__footer {
+  margin-top: 155px;
+}
+
 .instagram__aim {
   top: 111px;
   right: -280px;
 }
 
 .footer {
-  margin-top: 155px;
+  position: relative;
 }
 
 .footer__text {
@@ -2901,11 +2910,11 @@ body.lock {
   margin: 0 -20px;
 }
 
-.footer__item {
+.footer .menu-item {
   padding: 0 20px;
 }
 
-.footer__link {
+.footer .menu-item a {
   color: #fff;
   text-decoration: none;
   letter-spacing: 0.2px;
@@ -2914,7 +2923,7 @@ body.lock {
   transition: 0.3s ease all 0s;
 }
 
-.footer__link:hover {
+.footer .menu-item a:hover {
   color: #69692c;
 }
 
@@ -3024,6 +3033,10 @@ body.lock {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+  }
+
+  .header .menu-item:last-child {
+    margin-right: 40px;
   }
 
   .header__phone {
@@ -3356,7 +3369,7 @@ body.lock {
 }
 
 @media screen and (max-width: 991px) {
-  .header__item {
+  .header .menu-item {
     margin-right: 32px;
   }
 
@@ -3606,11 +3619,11 @@ body.lock {
     text-align: center;
   }
 
-  .header__item {
+  .header .menu-item {
     margin: 0px 0px 20px 0px;
   }
 
-  .header__link {
+  .header .menu-item a {
     font-size: 20px;
   }
 
@@ -4093,12 +4106,12 @@ body.lock {
     width: calc(50% - 30px) !important;
   }
 
-  .instagram__aim {
-    display: none;
+  .instagram__footer {
+    margin-top: 111px;
   }
 
-  .footer {
-    margin-top: 111px;
+  .instagram__aim {
+    display: none;
   }
 
   .footer__social {

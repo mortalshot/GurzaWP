@@ -1,15 +1,3 @@
-<?php
-/**
- * The header for our theme
- *
- * This is the template that displays all of the <head> section and everything up until <div id="content">
- *
- * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
- *
- * @package gurza
- */
-
-?>
 <!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -23,37 +11,48 @@
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 <div id="page" class="site">
-	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'gurza' ); ?></a>
-
-	<header id="masthead" class="site-header">
-		<div class="site-branding">
-			<?php
-			the_custom_logo();
-			if ( is_front_page() && is_home() ) :
-				?>
-				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-				<?php
-			else :
-				?>
-				<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-				<?php
-			endif;
-			$gurza_description = get_bloginfo( 'description', 'display' );
-			if ( $gurza_description || is_customize_preview() ) :
-				?>
-				<p class="site-description"><?php echo $gurza_description; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></p>
-			<?php endif; ?>
-		</div><!-- .site-branding -->
-
-		<nav id="site-navigation" class="main-navigation">
-			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><?php esc_html_e( 'Primary Menu', 'gurza' ); ?></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location' => 'menu-1',
-					'menu_id'        => 'primary-menu',
-				)
-			);
-			?>
-		</nav><!-- #site-navigation -->
-	</header><!-- #masthead -->
+	<header class="header">
+		<div class="header__container container">
+			<div class="header__body">
+				<div class="header__logo logo">
+					<a href="" class="logo__link">
+						<div class="logo__img">
+							<img src="<?php echo get_template_directory_uri(); ?>/gurza/img/icons/logo.svg" alt="">
+						</div>
+						<div class="logo__text-wrapper">
+							<img src="<?php echo get_template_directory_uri(); ?>/gurza/img/icons/logo-header.svg" alt="">
+						</div>
+					</a>
+				</div>
+				<div class="header__burger">
+					<span></span>
+				</div>
+				<nav class="header__menu menu">
+					<?php
+						wp_nav_menu([
+							'theme_location'  => 'header-menu',
+							'menu'            => '',
+							'container'       => false,
+							'menu_class'      => 'header__list menu__list',
+						]);
+					?>
+					<a href="tel:+79454554545" class="header__phone-mobile" data-da="menu-item--last, last, 767">
+						<svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+							xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M18.7563 3.39531L16.2602 0.901563C16.0841 0.724712 15.8748 0.584392 15.6443 0.488665C15.4139 0.392938 15.1667 0.34369 14.9172 0.34375C14.4086 0.34375 13.9305 0.542969 13.5719 0.901563L10.8859 3.5875C10.7091 3.76358 10.5688 3.97286 10.473 4.20333C10.3773 4.4338 10.3281 4.68091 10.3281 4.93047C10.3281 5.43906 10.5273 5.91719 10.8859 6.27578L12.85 8.23984C12.3903 9.25319 11.7511 10.175 10.9633 10.9609C10.1775 11.7506 9.25569 12.3922 8.24219 12.8547L6.27813 10.8906C6.10205 10.7138 5.89277 10.5735 5.6623 10.4777C5.43183 10.382 5.18472 10.3328 4.93516 10.3328C4.42656 10.3328 3.94844 10.532 3.58985 10.8906L0.901564 13.5742C0.724496 13.7506 0.584056 13.9603 0.488324 14.1912C0.392593 14.4221 0.34346 14.6696 0.343751 14.9195C0.343751 15.4281 0.54297 15.9062 0.901564 16.2648L3.39297 18.7562C3.96485 19.3305 4.75469 19.6562 5.56563 19.6562C5.73672 19.6562 5.90078 19.6422 6.0625 19.6141C9.22188 19.0938 12.3555 17.4133 14.8844 14.8867C17.4109 12.3625 19.0891 9.23125 19.6164 6.0625C19.7758 5.09453 19.4547 4.09844 18.7563 3.39531V3.39531Z"
+								fill="#69692C" />
+						</svg>
+					</a>
+					<a href="#contacts" class="header__phone menu__link">
+							<svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M18.7563 3.39531L16.2602 0.901563C16.0841 0.724712 15.8748 0.584392 15.6443 0.488665C15.4139 0.392938 15.1667 0.34369 14.9172 0.34375C14.4086 0.34375 13.9305 0.542969 13.5719 0.901563L10.8859 3.5875C10.7091 3.76358 10.5688 3.97286 10.473 4.20333C10.3773 4.4338 10.3281 4.68091 10.3281 4.93047C10.3281 5.43906 10.5273 5.91719 10.8859 6.27578L12.85 8.23984C12.3903 9.25319 11.7511 10.175 10.9633 10.9609C10.1775 11.7506 9.25569 12.3922 8.24219 12.8547L6.27813 10.8906C6.10205 10.7138 5.89277 10.5735 5.6623 10.4777C5.43183 10.382 5.18472 10.3328 4.93516 10.3328C4.42656 10.3328 3.94844 10.532 3.58985 10.8906L0.901564 13.5742C0.724496 13.7506 0.584056 13.9603 0.488324 14.1912C0.392593 14.4221 0.34346 14.6696 0.343751 14.9195C0.343751 15.4281 0.54297 15.9062 0.901564 16.2648L3.39297 18.7562C3.96485 19.3305 4.75469 19.6562 5.56563 19.6562C5.73672 19.6562 5.90078 19.6422 6.0625 19.6141C9.22188 19.0938 12.3555 17.4133 14.8844 14.8867C17.4109 12.3625 19.0891 9.23125 19.6164 6.0625C19.7758 5.09453 19.4547 4.09844 18.7563 3.39531V3.39531Z"
+									fill="#69692C" />
+							</svg>
+						</a>
+				</nav>
+			</div>
+		</div>
+	</header>

@@ -3896,7 +3896,7 @@ $(document).ready(function () {
     $('body').toggleClass('lock');
   }); // Go To
 
-  $(".menu").on("click", ".menu__link", function (event) {
+  $(".menu").on("click", ".menu-item a", function (event) {
     if (!$(this).hasClass('popup-link')) {
       event.preventDefault();
       var id = $(this).attr('href');
@@ -4252,32 +4252,17 @@ $(document).ready(function () {
 
   $(function () {
     var slidesNumber = $('.item-photoes').length;
-    var slidesClonedNumber = $('.item-photoes.slick-cloned').length;
-    var dotsWidth = 100 / (slidesNumber - slidesClonedNumber);
-    $('.item-photoes .slick-dots li').width(dotsWidth + '%');
-  }); // Добавление счетчика фотографий в модальном окне товара 1
+
+    if (slidesNumber > 1) {
+      var slidesClonedNumber = $('.item-photoes.slick-cloned').length;
+      var dotsWidth = 100 / (slidesNumber - slidesClonedNumber);
+      $('.item-photoes .slick-dots li').width(dotsWidth + '%');
+    }
+  }); // Добавление счетчика фотографий в модальном окне товара
 
   $(function () {
-    var $status = $('#product-1 .pagingInfo');
-    var $slickElement = $('#product-1 .item-photoes');
-    $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-      var i = (currentSlide ? currentSlide : 0) + 1;
-      $status.text('Фото ' + i + ' из ' + slick.slideCount);
-    });
-  }); // Добавление счетчика фотографий в модальном окне товара 2
-
-  $(function () {
-    var $status = $('#product-2 .pagingInfo');
-    var $slickElement = $('#product-2 .item-photoes');
-    $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-      var i = (currentSlide ? currentSlide : 0) + 1;
-      $status.text('Фото ' + i + ' из ' + slick.slideCount);
-    });
-  }); // Добавление счетчика фотографий в модальном окне товара 3
-
-  $(function () {
-    var $status = $('#product-3 .pagingInfo');
-    var $slickElement = $('#product-3 .item-photoes');
+    var $status = $('.pagingInfo');
+    var $slickElement = $('.item-photoes');
     $slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
       var i = (currentSlide ? currentSlide : 0) + 1;
       $status.text('Фото ' + i + ' из ' + slick.slideCount);
@@ -4527,5 +4512,30 @@ $(document).ready(function () {
     $('html, body').animate({
       scrollTop: 0
     }, '1000');
+  }); // first-screen offset
+
+  function firstscreenOffset() {
+    var headerHeight = $('.header').height();
+    $('.first-screen').css({
+      "padding-top": headerHeight,
+      "margin-top": -headerHeight
+    });
+  }
+
+  firstscreenOffset(); // instagram offset
+
+  function instagramOffset() {
+    var footerHeight = $('.footer').height();
+    $('.instagram').css({
+      "padding-bottom": footerHeight,
+      "margin-bottom": -footerHeight
+    });
+  }
+
+  instagramOffset();
+  $(window).resize(function () {
+    firstscreenOffset();
+    instagramOffset();
   });
+  $('#menu-footer-menu .menu-item:last-child a').addClass('popup-link');
 });

@@ -535,11 +535,9 @@
 		@media screen and (max-width: 767px) {
 			min-height: 600px;
 		}
-
 		@media screen and (max-width: 575px) {
 			min-height: 470px;
 		}
-
 		@media screen and (max-width: 450px) {
 			min-height: 290px;
 		}
@@ -593,7 +591,6 @@
 			@media screen and (max-width: 575px) {
 				max-width: 250px;
 			}
-
 			@media screen and (max-width: 450px) {
 				max-width: 145px;
 				bottom: 7%;
@@ -631,7 +628,7 @@
 		&.slick-center {
 			transform: scale(1.5);
 			img {
-				max-width: 300px;
+				max-width: 190px;
 			}
 		}
 
@@ -669,7 +666,6 @@
 		@media screen and (max-width: 1200px) {
 			margin: 0 -20px;
 		}
-
 		@media screen and (max-width: 991px) {
 			margin: 0 -15px;
 		}
@@ -683,15 +679,12 @@
 		@media screen and (max-width: 1200px) {
 			padding: 0 20px;
 		}
-
 		@media screen and (max-width: 991px) {
 			padding: 0 15px;
 		}
-
 		@media screen and (max-width: 575px) {
 			max-width: 350px;
 		}
-
 		@media screen and (max-width: 450px) {
 			max-width: 237px;
 		}
@@ -1902,11 +1895,9 @@
 	@media screen and (max-width: 991px) {
 		background: url(../img/footer/bg.png) no-repeat center bottom;
 	}
-
 	@media screen and (max-width: 767px) {
 		margin-top: 64px;
 	}
-
 	@media screen and (max-width: 450px) {
 		background: url(../img/footer/bg.png) no-repeat 65% bottom/200%;
 	}
@@ -2011,6 +2002,13 @@
 		}
 	}
 
+	&__footer {
+		margin-top: 155px;
+		@media screen and (max-width: 767px) {
+			margin-top: 111px;
+		}
+	}
+
 	&__aim {
 		top: 111px;
 		right: -280px;
@@ -2021,11 +2019,7 @@
 	}
 }
 .footer {
-	margin-top: 155px;
-
-	@media screen and (max-width: 767px) {
-		margin-top: 111px;
-	}
+	position: relative;
 
 	// .footer__text
 	&__text {
@@ -2048,7 +2042,6 @@
 		@media screen and (max-width: 1024px) {
 			margin: 0 auto 100px;
 		}
-
 		@media screen and (max-width: 450px) {
 			width: 282px;
 		}
@@ -2064,7 +2057,6 @@
 		@media screen and (max-width: 991px) {
 			max-width: 382px;
 		}
-
 		@media screen and (max-width: 767px) {
 			max-width: 212px;
 			padding: 0;
@@ -2135,19 +2127,18 @@
 	}
 
 	// .footer__item
-	&__item {
+	.menu-item {
 		padding: 0 20px;
-	}
 
-	// .footer__link
-	&__link {
-		color: #fff;
-		text-decoration: none;
-		letter-spacing: 0.2px;
-		transition: 0.3s ease all 0s;
-
-		&:hover {
-			color: $bg-color;
+		a {
+			color: #fff;
+			text-decoration: none;
+			letter-spacing: 0.2px;
+			transition: 0.3s ease all 0s;
+	
+			&:hover {
+				color: $bg-color;
+			}
 		}
 	}
 
@@ -2159,7 +2150,6 @@
 				height: 21px;
 			}
 		}
-
 		@media screen and (max-width: 450px) {
 			svg {
 				width: 54px;

@@ -50,7 +50,8 @@ if ( ! function_exists( 'gurza_setup' ) ) :
 		// This theme uses wp_nav_menu() in one location.
 		register_nav_menus(
 			array(
-				'menu-1' => esc_html__( 'Primary', 'gurza' ),
+				'header-menu' => esc_html__('Header menu', 'gurza'),
+				'footer-menu' => esc_html__('Footer menu', 'gurza'),
 			)
 		);
 
@@ -140,9 +141,14 @@ add_action( 'widgets_init', 'gurza_widgets_init' );
  * Enqueue scripts and styles.
  */
 function gurza_scripts() {
-	wp_enqueue_style( 'gurza-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'gurza-style', 'rtl', 'replace' );
+	wp_enqueue_style( 'gurza-style', get_stylesheet_uri());
+	wp_enqueue_style('gurza-custom', get_template_directory_uri() . '/gurza/css/style.min.css', array(), _S_VERSION);
 
+	wp_deregister_script('jquery');
+	wp_register_script('jquery', '//ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js');
+
+	wp_enqueue_script('gurza-elfsight-js', 'https://apps.elfsight.com/p/platform.js');
+	wp_enqueue_script('gurza-custom-js', get_template_directory_uri() . '/gurza/js/script.min.js', array('jquery'), _S_VERSION, true);
 	// wp_enqueue_script( 'gurza-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 
 	// if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -150,3 +156,118 @@ function gurza_scripts() {
 	// }
 }
 add_action( 'wp_enqueue_scripts', 'gurza_scripts' );
+
+// !Custom
+// svg support
+function cc_mime_types($mimes)
+{
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
+
+
+add_action( 'init', 'register_post_types' );
+function register_post_types(){
+	register_post_type( 'product-item', [
+		'label'  => null,
+		'labels' => [
+			'name'               => 'Товар', // основное название для типа записи
+			'singular_name'      => 'Товар', // название для одной записи этого типа
+			'add_new'            => 'Добавить товар', // для добавления новой записи
+			'add_new_item'       => 'Добавление товара', // заголовка у вновь создаваемой записи в админ-панели.
+			'edit_item'          => 'Редактирование товара', // для редактирования типа записи
+			'new_item'           => 'Новый товар', // текст новой записи
+			'view_item'          => 'Смотреть товар', // для просмотра записи этого типа.
+			'search_items'       => 'Искать товар', // для поиска по этим типам записи
+			'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+			'not_found_in_trash' => 'Не найдено в корзине', // если не было найдено в корзине
+			'parent_item_colon'  => '', // для родителей (у древовидных типов)
+			'menu_name'          => 'Товары', // название меню
+		],
+		'description'         => '',
+		'public'              => true,
+		// 'publicly_queryable'  => null, // зависит от public
+		// 'exclude_from_search' => null, // зависит от public
+		// 'show_ui'             => null, // зависит от public
+		// 'show_in_nav_menus'   => null, // зависит от public
+		'show_in_menu'        => true, // показывать ли в меню адмнки
+		// 'show_in_admin_bar'   => null, // зависит от show_in_menu
+		'show_in_rest'        => true, // добавить в REST API. C WP 4.7
+		'rest_base'           => null, // $post_type. C WP 4.7
+		'menu_position'       => 5,
+		'menu_icon'           => null,
+		//'capability_type'   => 'post',
+		//'capabilities'      => 'post', // массив дополнительных прав для этого типа записи
+		//'map_meta_cap'      => null, // Ставим true чтобы включить дефолтный обработчик специальных прав
+		'hierarchical'        => false,
+		'supports'            => [ 'title', 'editor' ], // 'title','editor','author','thumbnail','excerpt','trackbacks','custom-fields','comments','revisions','page-attributes','post-formats'
+		'taxonomies'          => ['size', 'color'],
+		'has_archive'         => false,
+		'rewrite'             => true,
+		'query_var'           => true,
+	] );
+}
+
+// хук для регистрации
+add_action( 'init', 'create_taxonomy' );
+function create_taxonomy(){
+	// список параметров: wp-kama.ru/function/get_taxonomy_labels
+	register_taxonomy( 'size', [ 'product-item' ], [ 
+		'label'                 => '', // определяется параметром $labels->name
+		'labels'                => [
+			'name'              => 'Размеры',
+			'singular_name'     => 'Размер',
+			'search_items'      => 'Найти размер',
+			'all_items'         => 'Все размеры',
+			'view_item '        => 'Посмотреть размер',
+			'parent_item'       => 'Родительский размер',
+			'parent_item_colon' => 'Родительский размер:',
+			'edit_item'         => 'Изменить размер',
+			'update_item'       => 'Обновить размер',
+			'add_new_item'      => 'Добавить новый размер',
+			'new_item_name'     => 'Имя нового размера',
+			'menu_name'         => 'Размеры',
+		],
+		'description'           => 'Размеры товаров', // описание таксономии
+		'public'                => true,
+		'publicly_queryable'    => null, // равен аргументу public
+		'show_in_nav_menus'     => true, // равен аргументу public
+		'show_ui'               => true, // равен аргументу public
+		'show_in_menu'          => true, // равен аргументу show_ui
+		'show_tagcloud'         => true, // равен аргументу show_ui
+		'show_in_quick_edit'    => null, // равен аргументу show_ui
+		'show_in_rest'        	=> true, // добавить в REST API. C WP 4.7
+		'hierarchical'          => false,
+
+		'rewrite'               => true,
+	] );
+	register_taxonomy( 'color', [ 'product-item' ], [ 
+		'label'                 => '', // определяется параметром $labels->name
+		'labels'                => [
+			'name'              => 'Цвета',
+			'singular_name'     => 'Цвет',
+			'search_items'      => 'Найти цвет',
+			'all_items'         => 'Все цвета',
+			'view_item '        => 'Посмотреть цвет',
+			'parent_item'       => 'Родительский цвет',
+			'parent_item_colon' => 'Родительский цвет:',
+			'edit_item'         => 'Изменить цвет',
+			'update_item'       => 'Обновить цвет',
+			'add_new_item'      => 'Добавить новый цвет',
+			'new_item_name'     => 'Имя нового цвета',
+			'menu_name'         => 'Цвета',
+		],
+		'description'           => 'Цвет товаров', // описание таксономии
+		'public'                => true,
+		'publicly_queryable'    => null, // равен аргументу public
+		'show_in_nav_menus'     => true, // равен аргументу public
+		'show_ui'               => true, // равен аргументу public
+		'show_in_menu'          => true, // равен аргументу show_ui
+		'show_tagcloud'         => true, // равен аргументу show_ui
+		'show_in_quick_edit'    => null, // равен аргументу show_ui
+		'show_in_rest'        	=> true, // добавить в REST API. C WP 4.7
+		'hierarchical'          => false,
+		'rewrite'               => true,
+	] );
+};

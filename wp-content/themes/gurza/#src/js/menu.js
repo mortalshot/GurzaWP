@@ -5,7 +5,7 @@ $(document).ready(function () {
     })
 
     // Go To
-    $(".menu").on("click", ".menu__link", function (event) {
+    $(".menu").on("click", ".menu-item a", function (event) {
         if (!$(this).hasClass('popup-link')) {
             event.preventDefault();
             var id = $(this).attr('href');

@@ -835,7 +835,12 @@
 	}
 
 	&__item {
+		display: block;
+		width: 29px;
+		height: 29px;
 		margin-right: 17px;
+		border-radius: 50%;
+		color: #cccccc;
 
 		&:last-child {
 			margin-right: 0;

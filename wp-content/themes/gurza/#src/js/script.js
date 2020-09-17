@@ -39,33 +39,17 @@ $(document).ready(function () {
 	// Ширина точек слайдера в модальном окне
 	$(function () {
 		let slidesNumber = $('.item-photoes').length;
-		let slidesClonedNumber = $('.item-photoes.slick-cloned').length;
-		let dotsWidth = 100 / (slidesNumber - slidesClonedNumber);
-		$('.item-photoes .slick-dots li').width(dotsWidth + '%');
+		if (slidesNumber > 1) {
+			let slidesClonedNumber = $('.item-photoes.slick-cloned').length;
+			let dotsWidth = 100 / (slidesNumber - slidesClonedNumber);
+			$('.item-photoes .slick-dots li').width(dotsWidth + '%');
+		}
 	})
 
-	// Добавление счетчика фотографий в модальном окне товара 1
+	// Добавление счетчика фотографий в модальном окне товара
 	$(function () {
-		let $status = $('#product-1 .pagingInfo');
-		let $slickElement = $('#product-1 .item-photoes');
-		$slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-			var i = (currentSlide ? currentSlide : 0) + 1;
-			$status.text('Фото ' + i + ' из ' + slick.slideCount);
-		});
-	});
-	// Добавление счетчика фотографий в модальном окне товара 2
-	$(function () {
-		let $status = $('#product-2 .pagingInfo');
-		let $slickElement = $('#product-2 .item-photoes');
-		$slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
-			var i = (currentSlide ? currentSlide : 0) + 1;
-			$status.text('Фото ' + i + ' из ' + slick.slideCount);
-		});
-	});
-	// Добавление счетчика фотографий в модальном окне товара 3
-	$(function () {
-		let $status = $('#product-3 .pagingInfo');
-		let $slickElement = $('#product-3 .item-photoes');
+		let $status = $('.pagingInfo');
+		let $slickElement = $('.item-photoes');
 		$slickElement.on('init reInit afterChange', function (event, slick, currentSlide, nextSlide) {
 			var i = (currentSlide ? currentSlide : 0) + 1;
 			$status.text('Фото ' + i + ' из ' + slick.slideCount);
@@ -322,4 +306,25 @@ $(document).ready(function () {
 		e.preventDefault();
 		$('html, body').animate({ scrollTop: 0 }, '1000');
 	});
+
+
+	// first-screen offset
+	function firstscreenOffset() {
+		let headerHeight = $('.header').height();
+		$('.first-screen').css({ "padding-top": headerHeight, "margin-top": -headerHeight })
+	}
+	firstscreenOffset();
+	// instagram offset
+	function instagramOffset() {
+		let footerHeight = $('.footer').height();
+		$('.instagram').css({ "padding-bottom": footerHeight, "margin-bottom": -footerHeight })
+	}
+	instagramOffset();
+
+	$(window).resize(function () {
+		firstscreenOffset();
+		instagramOffset();
+	});
+
+	$('#menu-footer-menu .menu-item:last-child a').addClass('popup-link');
 });
